@@ -1,0 +1,10 @@
+<p>Pagina: <strong>{{ paginaActual }}</strong>, Total Productos: <strong>{{ totalProductos }}</strong>, Total Páginas: <strong>{{ totalPaginas }}</strong></p>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item" [ngClass]="{'disabled': paginaActual === 1}"><a class="page-link pointer" (click)="cambiarPagina(-1, null)">Anterior</a></li>
+        <!-- <li class="page-item"><a class="page-link pointer" (click)="cambiarPagina(null, 1)">1</a></li>
+        <li class="page-item"><a class="page-link pointer" (click)="cambiarPagina(null, 2)">2</a></li>
+        <li class="page-item"><a class="page-link pointer" (click)="cambiarPagina(null, 3)">3</a></li> -->
+        <li class="page-item" [ngClass]="{'disabled': paginaActual === totalPaginas}"><a class="page-link pointer" (click)="cambiarPagina(1, null)">Siguiente</a></li>
+    </ul>
+</nav>

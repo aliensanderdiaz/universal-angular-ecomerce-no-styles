@@ -1,0 +1,14 @@
+<form class="form-inline row">
+    <input class="form-control col-10" type="search" placeholder="Search" aria-label="Search" (input)="escogerQuery()"
+        [(ngModel)]="terminoBusqueda" [ngModelOptions]="{standalone: true}">
+    <button class="btn btn-outline-success col-2" type="submit">Search</button>
+</form>
+<div class="row">
+    <div class="col-10">
+        <ul [style.display]="busquedasEncontradas.length> 0 ? 'block' : 'none'" class="list-group">
+            <li class="list-group-item pointer" (click)="irAbusqueda(busqueda)"
+                *ngFor="let busqueda of busquedasEncontradas">{{ busqueda.termino }}</li>
+        </ul>
+    </div>
+    <div class="col-2"></div>
+</div>

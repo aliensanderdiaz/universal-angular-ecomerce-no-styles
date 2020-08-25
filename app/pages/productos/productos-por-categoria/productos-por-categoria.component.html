@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="cargando">
+        Cargando Variables...
+    </div>
+    <div class="row" *ngIf="!cargando">
+        <p>
+            <strong>Categoría Principal Slug: </strong>{{ slugCategoriaPrincipal }}
+            <br>
+            <strong>Categoría Slug: </strong>{{ slugCategoria }}
+        </p>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-3">
+            <ul class="list-group" *ngIf="subcategorias && subcategorias.length > 0">
+                <li class="list-group-item">
+                    <h3>Subcategorias</h3>
+                </li>
+                <li class="list-group-item pointer" *ngFor="let categoria of subcategorias"
+                    (click)="irASubcategoria(categoria.nombre)">{{ categoria.nombre }}</li>
+            </ul>
+
+            <hr>
+
+            <ul class="list-group" *ngIf="filtrosAplicados && filtrosAplicados.length > 0">
+                <li class="list-group-item">
+                    <h3>Filtros Aplicados</h3>
+                </li>
+
+                
+                <ng-container *ngFor="let detalle of filtrosAplicados">
+
+                    <li class="list-group-item">
+    
+    
+                            <p>{{ detalle.detalle_0 }}</p>
+                            <button type="button" class="btn btn-secondary pointer mr-1 mt-1"
+                                *ngFor="let opcion of detalle.opciones" (click)="deleteOption(detalle.detalle_1, detalle.opciones)">
+                                {{ opcion }}
+                            </button>
+                    </li>
+                </ng-container>
+
+            </ul>
+
+
+            <hr>
+
+            <ul class="list-group" *ngIf="filtros && filtros.length > 0">
+                <li class="list-group-item">
+                    <h3>Filtros</h3>
+                </li>
+
+                
+                <ng-container *ngFor="let detalle of filtros">
+
+                    <li class="list-group-item" *ngIf="detalle[2] && detalle[3]">
+    
+    
+                            <p>{{ detalle[0] }}</p>
+                            <button type="button" class="btn btn-secondary pointer mr-1 mt-1" href="#"
+                                *ngFor="let opcion of detalle[2]" (click)="addOption(detalle[0], detalle[1], opcion)">
+                                {{ opcion }}
+                            </button>
+                    </li>
+                </ng-container>
+
+            </ul>
+        </div>
+        <div class="col-9" *ngIf="!cargando">
+            <div class="row">
+                <div class="col-10">
+                    <app-breadcrumb [items]="itemsBreadcrumd"></app-breadcrumb>
+                </div>
+                <div class="col-2">
+                    <app-ordenacion (ordenCambio)="cambiarOrden($event)"></app-ordenacion>
+                </div>
+            </div>
+            <div class="row" *ngIf="!cargandoProductos">
+                <app-producto class="col-3 pb-4" *ngFor="let producto of productos" [producto]="producto">
+                </app-producto>
+            </div>
+            <div class="row">
+                <app-paginacion [totalProductos]="totalProductos" [productosPorPagina]="productosPorPagina"
+                    [totalPaginas]="totalPaginas" [paginaActual]="paginaActual" (cambioPagina)="cambiarPagina($event)">
+                </app-paginacion>
+            </div>
+        </div>
+    </div>
+</div>

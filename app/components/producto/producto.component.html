@@ -1,0 +1,15 @@
+<div class="card">
+    <!-- <img *ngIf="producto.pictures" src="http://localhost:3001/images/{{producto._id}}.png" class="card-img-top" alt="...">
+    <img *ngIf="!producto.pictures" src="http://localhost:3001/images/noimagen.png" class="card-img-top" alt="..."> -->
+
+    <img *ngIf="producto.pictures" src="http://192.168.1.5:3001/images/{{producto._id}}.png" class="card-img-top" alt="...">
+    <img *ngIf="!producto.pictures" src="http://192.168.1.5:3001/images/noimagen.png" class="card-img-top" alt="...">
+
+    
+    <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <p class="card-text">{{ producto.caracteristicas?.precio }}</p>
+        <button class="btn btn-secondary" (click)="irAProducto()">Ver</button> - 
+        <button class="btn btn-primary" (click)="addProductToCart(producto)">Comprar</button>
+    </div>
+</div>

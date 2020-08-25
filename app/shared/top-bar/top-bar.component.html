@@ -1,0 +1,65 @@
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-4">
+            <h4 class="text-center pointer">
+                <a class="navbar-brand" [routerLink]="['/']">PlayCommerce</a>
+            </h4>
+        </div>
+        <div class="col-4">
+            <app-search-header></app-search-header>
+        </div>
+        <div class="col-2">
+            <app-cart-header></app-cart-header>
+        </div>
+        <div class="col-2" (click)="login = !login" *ngIf="!isLogged">
+            <button type="button" class="btn btn-outline-primary btn-block">Sign In</button>
+        </div>
+        <div class="col-2" (click)="onLogout()" *ngIf="isLogged">
+            <button type="button" class="btn btn-outline-danger btn-block">Logout</button>
+        </div>
+    </div>
+    <div class="row" *ngIf="login">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <app-login-header (loginCompleted)="login = false"></app-login-header>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+                    <ul class="navbar-nav mr-auto">
+        
+                        <li class="nav-item dropdown" *ngFor="let categoria of CATEGORIAS">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ categoria.nombre }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" [routerLink]="['/', 'categorias', funcionesService.slugify(categoria.nombre)]">{{ categoria.nombre }}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" [routerLink]="['/', 'categorias', funcionesService.slugify(categoria.nombre), funcionesService.slugify(categoriaHija.nombre)]" *ngFor="let categoriaHija of categoria.categorias">{{ categoriaHija.nombre }}</a>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Marcas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" [routerLink]="['/', 'marcas', funcionesService.slugify(marca.nombre)]" *ngFor="let marca of MARCAS">{{ marca.nombre }}</a>
+                            </div>
+                        </li>
+        
+        
+                    </ul>
+        
+                </nav>
+            </div>
+        </div>
+</div>
+
+

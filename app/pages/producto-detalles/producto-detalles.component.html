@@ -1,0 +1,41 @@
+<div class="container" *ngIf="!cargando">
+    <div class="row">
+        <h1>{{ producto.nombre }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img src="http://localhost:3001/images/{{ producto._id }}.png" class="card-img" alt="">
+        </div>
+        <div class="col-8">
+            <h3>Características</h3>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let caracteristica of array_caracteristicas">
+                    {{ caracteristica }} - {{ producto.caracteristicas[caracteristica] }}
+                </li>
+            </ul>
+
+
+            <h3 *ngIf="hermandad">Opciones</h3>
+            <div *ngIf="hermandad" class="row">
+                <div *ngFor="let propiedad of hermandad.propiedades" class="col">
+                    <h5>{{ propiedad.valor }}</h5>
+                    <ul class="list-group">
+                            <li 
+                            class="list-group-item pointer" 
+                            *ngFor="let opcion of propiedad.opciones" 
+                            (click)="cambioOpcion(propiedad.codigo, opcion)"
+                            [ngClass]="{'active': productoElegido.detalles[propiedad.codigo] === opcion}"
+                            >{{ opcion }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- <h3>Detalles</h3>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let detalle of array_detalles">
+                    {{ detalle }} - {{ producto.detalles[detalle] }}
+                </li>
+            </ul> -->
+        </div>
+    </div>
+</div>

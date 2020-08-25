@@ -1,0 +1,5 @@
+<div class="input-group">
+        <select class="custom-select" [(ngModel)]="ordenPor" (change)="cambiarOrden()">
+            <option [value]="item.value" *ngFor="let item of ordenado">{{ item.nombre }}</option>
+        </select>
+    </div>
